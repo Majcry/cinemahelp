@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaHelp</title>
+    <link rel="icon" type="image/png" href="../static/images/CH_logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header>
+        <img src="../static/images/CinemaHelp.png" alt="CinemaHelp Title" id="title">
+
+        <button id="themeToggle" onclick="toggleTheme()">Dark Mode</button>
+    </header>
+    <main>
+
+        <form method="GET" action="/" class="searchForm">
+
+            <div class="formRow">
+                <label for="query">Search for a movie:</label>
+                <input type="text" name="query" placeholder="Enter movie title">
+            </div>
+            
+            <h2>Discover movies</h2>
+
+            <div class="formRow">
+                <div class="formGroup">
+                    <label for="year">Release Year:</label>
+                    <input type="text" name="year" placeholder="Enter release year (optional)">
+                </div>
+                <div class="formGroup">
+                    <label for="genre">Genre:</label>
+                    <select name="genre_id" placeholder="Enter genre (optional)">
+                        <option value="">Select a genre</option>
+                        {% for genre in genres %}
+                        <option value="{{ genre['id'] }}">{{ genre['name'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div id="recomToggle">
+                <label for="recToggle">Get Recommendations:</label>
+                <input type="checkbox" name="recToggle" id="recToggle">
+            </div>
+
+            <button type="submit" id="submitButton">Search</button>
+        </form>
+
+
+
+        <div id="resultsHeader">
+            {% if movies %}
+                <h2>Results:</h2>
+            {% else %}
+                <h2>No movies found. Please try a different search.</h2>
+            {% endif %}
+        </div>
+        <div class="movieGrid">
+            {% for movie in movies %}
+            
+                <div class="moviePreview" data-movie-id="{{ movie['id'] }}">
+                    <img src="https://image.tmdb.org/t/p/w185{{ movie['poster_path'] }}" alt="{{ movie['title'] }} poster">
+                    <h2 class="overlay">{{ movie['title'] }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <div id="movieDetails" class="popup">
+            <div class="popupContent" onfocusout="closePopup()">
+                <span id="closePopup" >&times;</span>
+                <div id="movieInfo">
+                    <img id="popupPoster" src="" alt="Popup movie poster">
+                    <h2 id="popupTitle"></h2>
+                    <p id="popupOverview"></p>
+                    <p><strong>Release Date:</strong> <span id="popupReleaseDate"></span></p>
+                    <p><strong>Genres:</strong> <span id="popupGenres"></span></p>
+                    <p><strong>Rating:</strong> <span id="popupRating"></span></p>
+                </div>
+            </div>
+        </div>
+        
+
+        <script src="../static/popupHandler.js"></script>
+        <script src="../static/theme.js"></script>
+
+        
+    </main>
+    <footer>
+        <p>&copy; 2025 Maj Križnar</p>
+    </footer>
+</body>
+</html>
