@@ -9,7 +9,13 @@
 </head>
 <body>
     <header>
-        <img src="../static/images/CinemaHelp.png" alt="CinemaHelp Title" id="title">
+
+        <script>
+            const logoLight = "{{ url_for('static', filename='images/CinemaHelp.png') }}";
+            const logoDark = "{{ url_for('static', filename='images/CinemaHelp_Dark.png') }}";
+        </script>
+
+        <img src="{{ url_for('static', filename='images/CinemaHelp.png') }}" alt="CinemaHelp Title" id="title">
 
         <button id="themeToggle">Dark Mode</button>
     </header>

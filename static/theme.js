@@ -4,11 +4,11 @@ const title = document.getElementById('title');
 function setTheme(isDark) {
     if (isDark) {
         document.body.classList.add('dark');
-        title.src = "../static/images/CinemaHelp_Dark.png";
+        title.src = logoDark;
         localStorage.setItem('theme', 'dark');
     } else {
         document.body.classList.remove('dark');
-        title.src = "../static/images/CinemaHelp.png";
+        title.src = logoLight;
         localStorage.setItem('theme', 'light');
     }
 }
